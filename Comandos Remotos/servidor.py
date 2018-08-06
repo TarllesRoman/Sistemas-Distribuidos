@@ -4,7 +4,7 @@ server_port = 19199
 
 from socket import *
 import subprocess
-import os
+import commands
 
 serverSocket = socket(AF_INET,SOCK_STREAM)
 serverSocket.bind(('', server_port))
@@ -26,10 +26,8 @@ while True:
 			break;
 			
 		print "Mensagem recebida: ",message.decode("utf-8")
-		resultado = subprocess.call(message.decode("utf-8") + " >> temp.txt", shell=True)
+		resultado = commands.getoutput(message.decode("utf-8"))
 		
-		conexao.send(open("temp.txt","r").read())
-		
-		os.remove("temp.txt")
+		conexao.send(resultado)
 	
 serverSocket.close()
