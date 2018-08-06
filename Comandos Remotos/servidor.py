@@ -24,6 +24,10 @@ while True:
 			print "Conexao encerrada"
 			conexao.close()
 			break;
+		if(message=="EXIT")
+			print "Conexao encerrada"
+			conexao.close()
+			break;
 			
 		print "Mensagem recebida: ",message.decode("utf-8")
 		resultado = commands.getoutput(message.decode("utf-8"))
