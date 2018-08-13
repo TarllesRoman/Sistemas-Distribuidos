@@ -24,7 +24,7 @@ while True:
 			print "Conexao encerrada"
 			conexao.close()
 			break;
-		if(message=="EXIT")
+		if(message=="EXIT"):
 			print "Conexao encerrada"
 			conexao.close()
 			break;
