@@ -33,7 +33,6 @@ def server_on():
 			mensagem = raw_input("Digite uma mensagem: ")
 	except:
 		clienteSocket.close()
-		clienteSocket = socket(AF_INET, SOCK_STREAM)
 		serverOFF = True
 		server_off()			
 			
@@ -60,10 +59,10 @@ def connect():
 	global clienteSocket
 	
 	try:
+		clienteSocket = socket(AF_INET, SOCK_STREAM)
 		clienteSocket.connect((server_ip,server_port))
 		serverOFF = False
 	except Exception as e:
-		print e 
 		serverOFF = True
 
 
