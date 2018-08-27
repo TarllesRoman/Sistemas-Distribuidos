@@ -10,6 +10,8 @@ server_port = 19199
 serverOFF = False
 
 mensagem = ""
+tm_zfill = 10
+tm_buffer = 2048
 
 clienteSocket = socket(AF_INET, SOCK_STREAM)
 
@@ -25,10 +27,17 @@ def server_on():
 		while mensagem != '\x18':
 			clienteSocket.send(mensagem.encode("utf-8"))
 				
-			resposta = clienteSocket.recv(2048)
+			resposta = clienteSocket.recv(tm_buffer)
+			tamanho = int(resposta[0:tm_zfill])
+			respostaCompleta = resposta[tm_zfill:]
+			qtdLida = tm_buffer - tm_zfill
+			while(qtdLida < tamanho):
+				respostaCompleta += clienteSocket.recv(tm_buffer)
+				qtdLida += tm_buffer
+			
 			if(resposta == ""):
 				server_off()
-			print "Resposta:", resposta
+			print "Resposta:", respostaCompleta
 				
 			mensagem = raw_input("Digite uma mensagem: ")
 	except:

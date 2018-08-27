@@ -10,6 +10,10 @@ serverSocket = socket(AF_INET,SOCK_STREAM)
 serverSocket.bind(('', server_port))
 serverSocket.listen(1)
 
+cmdSemResposta = "Comando sem resposta"
+tm_zfill = 10
+tm_buffer = 2048
+
 while True:
 	print "Server pronto para aceitar conexao"
 	
@@ -17,7 +21,7 @@ while True:
 	print "Conexao aceita"
 	
 	while True:
-		message = conexao.recv(2048)
+		message = conexao.recv(tm_buffer)
 		
 		if(message=="EXIT"):
 			print "Conexao encerrada"
@@ -26,6 +30,9 @@ while True:
 			
 		print "Mensagem recebida: ",message.decode("utf-8")
 		resultado = commands.getoutput(message.decode("utf-8"))
-		conexao.send(resultado)
+		if(resultado == ""):
+			conexao.send(str(len(cmdSemResposta)).zfill(tm_zfill)+cmdSemResposta)
+		else:
+			conexao.send(str(len(resultado)).zfill(tm_zfill)+resultado)
 	
 serverSocket.close()
