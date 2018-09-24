@@ -1,12 +1,11 @@
 #coding: utf-8
 
+from socket import *
+import hashlib
+import server_modulo as modulo
+
 TCP_port = 19199
 UDP_port = 19198
-
-from socket import *
-import subprocess
-import commands
-import modulo
 
 TCPSocket = socket(AF_INET,SOCK_STREAM)
 TCPSocket.bind(('', TCP_port))
@@ -27,30 +26,35 @@ dic_operacoes = {
 }
 
 while True:
-	print "Server pronto para aceitar conexao"
+	print ('Server pronto para aceitar conexao')
 	
 	try:
 		conexao, cliente = TCPSocket.accept()
-		print "Conexao aceita"
+		print ('Conexao aceita')
 		conexao.close()
 	except:
 		conexao.close()
 	
 	try:
 		message, client = receiver_socket.recvfrom(2048)
+
+		message = message.decode("utf-8")
 						
-		print "Mensagem recebida: ",message.decode("utf-8")
-		msg_split = message.split('#') 
-		operacao = msg_split[0]
-		num1 = int(msg_split[1])
-		num2 = int(msg_split[2])
-		
-		resultado = dic_operacoes[operacao](num1,num2)
-		dest = (client[0],UDP_port)
-		sender_socket.sendto(str(resultado),dest)
-		print "dest",dest
-		
-	except:
+		print ('Mensagem recebida: '+message)
+		msg_split = message.split("#")
+		msg_hash = msg_split[0]
+		operacao = msg_split[1]
+		num1 = int(msg_split[2])
+		num2 = int(msg_split[3])
+		msg_completa = operacao + '#' + str(num1) + '#' + str(num2)
+		if(msg_hash == hashlib.md5(msg_completa.encode('utf-8')).hexdigest()):
+			resultado = dic_operacoes[operacao](num1,num2)
+			dest = (client[0],UDP_port)
+			sender_socket.sendto(str(resultado).encode("utf-8"),dest)
+		else:
+			sender_socket.sendto("MSG ERRADA".encode("utf-8"),dest)
+	except Exception as e:
+		print(e)
 		receiver_socket.close()
 		conexao.close()
 		sender_socket.close()
