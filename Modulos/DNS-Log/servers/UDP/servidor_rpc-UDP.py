@@ -7,7 +7,6 @@ from datetime import datetime
 import requests
 import modulo_hora as m_hora
 
-time_url = 'http:'
 TCP_port = 19199
 UDP_port = 19198
 
@@ -45,6 +44,7 @@ while True:
 		message = message.decode("utf-8")
 
 		print ('Mensagem recebida: '+message)
+
 		msg_split = message.split("#")
 		msg_hash = msg_split[0]
 		operacao = msg_split[1]
@@ -56,7 +56,7 @@ while True:
 			arq_log = open('log.txt', 'a')
 		except:
 			arq_log = open('log.txt', 'w')
-		log_completo = client[0] + "$" + msg_completa + "$" + str(m_hora.sinchronized())
+		log_completo = str(m_hora.sinchronized()) + "$" + client[0] + "$" + msg_completa
 		arq_log.write(log_completo)
 
 		if(msg_hash == hashlib.md5(msg_completa.encode('utf-8')).hexdigest()):

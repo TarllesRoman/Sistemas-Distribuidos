@@ -4,7 +4,7 @@ import hashlib
 import socket
 import json
 
-DNS_ip = '10.3.2.51'
+DNS_ip = 'localhost'
 DNS_port = 19197
 
 TCP_port = 19199
@@ -83,7 +83,6 @@ def find_server(num1, num2, op):
 	cmd = dic_ops[op]+'#'+num1+'#'+num2
 	cmd = hashlib.md5(cmd.encode('utf8')).hexdigest()+'#'+cmd
 	dns_response = dns_request(dic_ops[op])
-	print('DNS_response: '+dns_response)
 	if(dns_response == None):
 		print ('\033[0;31;40mServidor DNS não encontrado\033[m')
 		return None

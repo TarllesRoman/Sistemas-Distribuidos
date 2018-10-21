@@ -3,8 +3,14 @@
 from datetime import datetime, timedelta
 import json
 import requests
+import time
 
 url = 'http://www.worldclockapi.com/api/json/utc/now'
+
+'''Time delta com o modulo da diferença de horarios'''
+diff = 0
+'''Indica se a diferença é positiva ou negativa'''
+diff_signal = True
 
 '''Realiza uma requisição HTTP para pegar a hora em UTC'''
 def request_utc():
@@ -37,14 +43,31 @@ def somar_h(dt1, dt2):
 def sub_h(dt1, dt2):
     return dt1 - dt2
 
-'''Obtem a hora atual e a sincoroniza'''
+'''Obtem a hora atual ja sincoroniza'''
 def sinchronized():
-    r_utc = request_utc()
-    n_utc = utc_now()
+    global diff, diff_signal
     l_now = now()
 
-    dif = diferenca(r_utc, n_utc)
+    return somar_h(l_now,diff) if diff_signal else sub_h(l_now, diff)
+
+def start_sync(delay):
+    th_sync = threading.Thread(target=loop_sync,args=(delay))
+    th_sync.start()
+
+def loop_sync(delay):
+    while True:
+        sync()
+        time.sleep(delay)
+
+def sync():
+    global diff, diff_signal
+
+    r_utc = request_utc()
+    n_utc = utc_now()
+
     if(r_utc > n_utc):
-        return somar_h(l_now, dif)
+        diff_signal = True
     else:
-        return sub_h(l_now, dif)
+        diff_signal = False
+
+    diff = diferenca(r_utc,n_utc)
