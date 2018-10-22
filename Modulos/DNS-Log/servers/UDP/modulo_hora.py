@@ -8,7 +8,8 @@ import time
 url = 'http://www.worldclockapi.com/api/json/utc/now'
 
 '''Time delta com o modulo da diferença de horarios'''
-diff = 0
+n = datetime.now()
+diff = n - n
 '''Indica se a diferença é positiva ou negativa'''
 diff_signal = True
 
@@ -61,13 +62,15 @@ def loop_sync(delay):
 
 def sync():
     global diff, diff_signal
+	
+    try:
+        r_utc = request_utc()
+        n_utc = utc_now()
 
-    r_utc = request_utc()
-    n_utc = utc_now()
-
-    if(r_utc > n_utc):
-        diff_signal = True
-    else:
-        diff_signal = False
-
-    diff = diferenca(r_utc,n_utc)
+        if(r_utc > n_utc):
+            diff_signal = True
+        else:
+            diff_signal = False
+        diff = diferenca(r_utc,n_utc)
+    except:
+        print("Erro ao atualizar time delta")
