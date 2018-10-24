@@ -8,8 +8,7 @@ import time
 url = 'http://www.worldclockapi.com/api/json/utc/now'
 
 '''Time delta com o modulo da diferença de horarios'''
-n = datetime.now()
-diff = n - n
+diff = 0
 '''Indica se a diferença é positiva ou negativa'''
 diff_signal = True
 
@@ -44,33 +43,38 @@ def somar_h(dt1, dt2):
 def sub_h(dt1, dt2):
     return dt1 - dt2
 
-'''Obtem a hora atual ja sincoroniza'''
+'''Obtem a hora atual sincoroniza, É necessário ter utilizado o método start_sync'''
 def sinchronized():
     global diff, diff_signal
     l_now = now()
 
     return somar_h(l_now,diff) if diff_signal else sub_h(l_now, diff)
 
+'''Inicia a sincronização com um delay. 
+    Esse delay é o tempo em que o modulo ficará ocioso antes de
+    buscar uma nova atualização no servidor
+'''
 def start_sync(delay):
     th_sync = threading.Thread(target=loop_sync,args=(delay))
     th_sync.start()
 
+'''loop para a sincronização. while True'''
 def loop_sync(delay):
     while True:
         sync()
         time.sleep(delay)
 
+'''realiza a sincronização da diferença do tempo consultado
+    e do relógio do computador'''
 def sync():
     global diff, diff_signal
-	
-    try:
-        r_utc = request_utc()
-        n_utc = utc_now()
 
-        if(r_utc > n_utc):
-            diff_signal = True
-        else:
-            diff_signal = False
-        diff = diferenca(r_utc,n_utc)
-    except:
-        print("Erro ao atualizar time delta")
+    r_utc = request_utc()
+    n_utc = utc_now()
+
+    if(r_utc > n_utc):
+        diff_signal = True
+    else:
+        diff_signal = False
+
+    diff = diferenca(r_utc,n_utc)
