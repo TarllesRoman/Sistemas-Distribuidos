@@ -28,17 +28,13 @@ def send_json(str_js):
     except:
         return False
 
-def rec(end_c):
+def receive(end_c):
     try:
         data = sock.recv(1024).decode('utf-8')
         while(end_c not in data):
             data = data+sock.recv(1024).decode('utf-8')
     except:
         return ""
-
-def gramas_seconds():
-    pass
-
 
 
 """
