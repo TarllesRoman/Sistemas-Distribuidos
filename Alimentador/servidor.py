@@ -3,7 +3,7 @@
 from socket import *
 
 TCP_port = 19199
-UDP_port = 19198
+UDP_port = 19197
 
 TCPSocket = socket(AF_INET,SOCK_STREAM)
 TCPSocket.bind(('', TCP_port))

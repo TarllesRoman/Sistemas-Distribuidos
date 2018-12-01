@@ -6,6 +6,8 @@ sock = None
 char_end = "!"
 
 def connect():
+    global sock
+    if(sock != None): return True
     try:
         nearby_devices = bluetooth.discover_devices(lookup_names=True)
         while bluez not in nearby_devices:
@@ -22,6 +24,7 @@ def connect():
         return False
 
 def send_json(str_js):
+    global sock
     try:
         sock.send(json.dumps(str_js))
         return True
@@ -29,10 +32,12 @@ def send_json(str_js):
         return False
 
 def receive(end_c):
+    global sock
     try:
         data = sock.recv(1024).decode('utf-8')
         while(end_c not in data):
             data = data+sock.recv(1024).decode('utf-8')
+        return data
     except:
         return ""
 

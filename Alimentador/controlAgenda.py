@@ -1,6 +1,6 @@
 #coding: utf-8
 
-import json
+import json, modulo_hora
 
 file_name = "agenda.txt"
 
@@ -11,7 +11,8 @@ def get_alimentacoes():
         file.close()
         return json.loads(jso)
     except:
-        return None
+        escrever_agenda([])
+        return json.loads("[]")
 
 def escrever_agenda(alimentacoes):
     try:
@@ -25,9 +26,11 @@ def escrever_agenda(alimentacoes):
 def adicionar_alimentacao(agenda, alimentacao):
     for alm in agenda:
         if(alm["dia"] == alimentacao["dia"] and alm["hora"] == alimentacao["hora"]):
-            return False
+            return None
+    dt = modulo_hora.str_time(alimentacao["dia"], alimentacao["hora"])
+    alimentacao["timestamp"] = modulo_hora.get_timestamp(dt)
     agenda.append(alimentacao)
-    return True
+    return agenda
 
 def adicionar_alimentacoes(alimentacoes):
     agenda = get_alimentacoes()
@@ -37,6 +40,11 @@ def adicionar_alimentacoes(alimentacoes):
         alm = {"dia": alimentacoes["dia"],"tanque":alimentacoes["tanque"],"quantidade":alimentacoes["quantidade"],"hora":hora} #Alimentacao
         adicionar_alimentacao(agenda, alm)
     return escrever_agenda(agenda)
+
+def remover(alimentacao):
+    agenda = get_alimentacoes()
+    agenda.remove(alimentacao)
+    escrever_agenda(agenda)
 
 def remover_alimentacao(alimentacao):
     agenda = get_alimentacoes()
