@@ -2,14 +2,14 @@
 #include <SoftwareSerial.h>
 #include <Servo.h>
 
-#define SERVO 5//define motor servo na porta digital 6
-#define REL 8//define rele de energia na porta digital 7
+#define SERVO 2//define motor servo na porta digital 6
+#define REL 10//define rele de energia na porta digital 7
 #define ESQ 130 //define alimentador saida da esquerda
 #define DIR 15 // define alimentador saida da direita
 #define CEN 70 // define alimentador centro
 #define DELPOS 500//Define um delay de giro de posicao do servo
 
-SoftwareSerial BT(6, 7); // RX, TX
+SoftwareSerial BT(5, 7); // RX, TX
 Servo s;//variavel do tipo servo
 char cmd;
 
