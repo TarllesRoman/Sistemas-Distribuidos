@@ -10,9 +10,16 @@ def connect():
     if(sock != None): return True
     try:
         nearby_devices = bluetooth.discover_devices(lookup_names=True)
-        while bluez not in nearby_devices:
+        tentativas = 2
+        while (bluez not in nearby_devices) and tentativas:
+            print("\nbluetooth nao encontrado, tentativas restantes: "+str(tentativas))
             nearby_devices = bluetooth.discover_devices(lookup_names=True)
-        print('Founded HC-06')
+            tentativas -= 1
+        if(bluez in nearby_devices):
+            print('Founded HC-06')
+        else:
+            raise Exception
+
         addr = bluez[0]
         port = 1
         sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
@@ -21,6 +28,7 @@ def connect():
         print("Connected HC-06")
         return True
     except:
+        sock = None
         return False
 
 def send_json(str_js):
@@ -29,6 +37,7 @@ def send_json(str_js):
         sock.send(json.dumps(str_js))
         return True
     except:
+        sock = None
         return False
 
 def receive(end_c):
@@ -39,6 +48,7 @@ def receive(end_c):
             data = data+sock.recv(1024).decode('utf-8')
         return data
     except:
+        sock = None
         return ""
 
 

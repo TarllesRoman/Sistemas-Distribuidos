@@ -1,0 +1,5 @@
+{"dia": "01/12/2018", "tanque": 3, "quantidade": 5000, "hora": "23:48", "timestamp": 1543715280.0}$ok
+{"dia": "01/12/2018", "tanque": 3, "quantidade": 5000, "hora": "23:49", "timestamp": 1543715340.0}$ok
+{"dia": "01/12/2018", "tanque": 2, "quantidade": 5000, "hora": "23:51", "timestamp": 1543715460.0}$erro
+{"dia": "01/12/2018", "tanque": 2, "quantidade": 5000, "hora": "23:52", "timestamp": 1543715520.0}$erro
+{"dia": "01/12/2018", "tanque": 2, "quantidade": 5000, "hora": "23:53", "timestamp": 1543715580.0}$ok
