@@ -4,7 +4,7 @@ import time
 import hashlib
 import socket
 import json
-host = '192.168.0.101'
+host = '192.168.0.103'
 porta = 19199
 serverPort = 19197
 
