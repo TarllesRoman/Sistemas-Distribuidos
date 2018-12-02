@@ -1,18 +1,21 @@
 #coding utf-8
 
-import servidor, controlServidor, threading, json, time
+import controlServidor, servidor, threading, json, time
 import modulo_hora
 
 controle = controlServidor.Control()
 
 def job_receiver():
     while True:
-        if(servidor.testeTCP()):
-            message,client = servidor.receiveUDP()
-            if(message):
-                controle.ler = True
-                controle.mensagem = message
-                controle.cliente = client
+        try:
+            if(servidor.testeTCP()):
+                message,client = servidor.receiveUDP()
+                if(message):
+                    controle.ler = True
+                    controle.mensagem = message
+                    controle.cliente = client
+        except Exception as e:
+            print("Tentativa de comunicação com chave invalida"+str(e))
 
 def efetuar_leitura():
     mensagem = json.loads(controle.mensagem)

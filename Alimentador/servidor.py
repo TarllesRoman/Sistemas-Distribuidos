@@ -1,9 +1,13 @@
 #coding: utf-8
 
 from socket import *
+import Cryptpy
 
 TCP_port = 19199
 UDP_port = 19197
+
+auth_key = input("Escolha uma chave de criptografia: ")
+crypto = Cryptpy.Cryptpy(auth_key)
 
 TCPSocket = socket(AF_INET,SOCK_STREAM)
 TCPSocket.bind(('', TCP_port))
@@ -24,19 +28,19 @@ receiver_socket = socket(AF_INET, SOCK_DGRAM)
 receiver_socket.bind(('', UDP_port))
 
 def receiveUDP():
+	global receiver_socket
 	try:
 		print("Aguardando mensagem UDP")
 		message, client = receiver_socket.recvfrom(2048)
-		message = message.decode("utf-8")
-		print ('Mensagem recebida: '+message)
-		return [message, client]
+		return [crypto.decrypt(message), client]
 	except:
 		return ""
 
 sender_socket = socket(AF_INET, SOCK_DGRAM)
 def send(msg,dest):
 	print("Respondendo "+str(msg)+" para "+str(dest))
-	sender_socket.sendto(str(msg).encode("utf-8"),dest)
+	msg = crypto.crypt(str(msg))
+	sender_socket.sendto(msg,dest)
 
 def close():
 	receiver_socket.close()

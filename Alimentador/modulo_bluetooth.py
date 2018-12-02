@@ -1,6 +1,11 @@
 import bluetooth, time, json
 
-bluez = ('20:16:10:25:34:22', 'HC-06')
+mac_bluez = input("Digite o endereço MAC da placa Bluetooth: ")
+if(mac_bluez == ""):
+    mac_bluez = '20:16:10:25:34:22' 
+
+bluez = (mac_bluez, 'HC-06')
+print("Bluez, "+str(bluez))
 
 sock = None
 char_end = "!"

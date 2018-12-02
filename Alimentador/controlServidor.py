@@ -61,7 +61,7 @@ class Control():
 		alm = self.proxima
 		dados = {
             "tanque":self.proxima["tanque"],
-            "tempo":self.proxima["quantidade"]
+            "tempo":self.gramas_seconds(self.proxima["quantidade"])
         }
 		
 		modulo_bluetooth.connect()
@@ -93,8 +93,9 @@ class Control():
 				self.proxima = alm
 		return time_s
 
-	def gramas_seconds(self):
-		pass
+	def gramas_seconds(self, gramas):
+		s = gramas/13
+		return int(s) * 1000
 	
 	def escrever_log(self, resultado, alimentacao):
 		try:

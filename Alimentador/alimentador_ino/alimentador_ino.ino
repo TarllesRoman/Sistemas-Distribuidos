@@ -39,9 +39,11 @@ void loop()
     command.toCharArray(jj, 100);
     aJsonObject* root = aJson.parse(jj);
     aJsonObject* tempo = aJson.getObjectItem(root, "tempo");
+    Serial.println("TEMPO: ");
     Serial.println(tempo->valueint);
     aJsonObject* tanque = aJson.getObjectItem(root, "tanque");
-    Serial.println(tanque->valueint);
+    Serial.println("TANQUE");
+    Serial.print(tanque->valueint);
     
     if(tanque->valueint==1){
       Serial.write("Tanque1");
