@@ -27,16 +27,15 @@ def job_alimentar():
         try:
             controle.update_proxima()
             print("\nPROXIMA   : "+str(controle.proxima))
-            #print("\nNOW  : "+str(modulo_hora.request_utc()))
-            #print("\nNOW  : "+str(modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200))
             while(controle.proxima["timestamp"] > (modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200)):
                 print("\nPA: " + str(controle.proxima["timestamp"]) + "     NOW: "+str(modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200))
-                pass
-
+                time.sleep(5)
             print("\n\nRealizando a alimentação: "+str(controle.proxima))
             controle.food_now()
-        except Exception as e:
-            print("EXCEPTION"+str(e))
+        except:
+            print("\nNada para alimentar! Posso descançar por enquanto")
+            return None
+
 
 if __name__ == "__main__":
     th_receiver =  threading.Thread(target=job_receiver, args=())
@@ -47,6 +46,10 @@ if __name__ == "__main__":
         if(controle.ler):
             controle.ler = False
             efetuar_leitura()
+        if(("timestamp" in controle.proxima) and (not th_alimentar.is_alive())):
+            print("\nTenho bocas para alimentar!")
+            th_alimentar = threading.Thread(target=job_alimentar, args=())
+            th_alimentar.start()
 
 
 

@@ -83,6 +83,7 @@ class Control():
 		self.update_proxima()
 
 	def update_proxima(self):
+		self.proxima = {}
 		alms = controlAgenda.get_alimentacoes()
 		time_s = alms[0]["timestamp"]
 		self.proxima = alms[0]
