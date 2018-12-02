@@ -11,7 +11,6 @@ class Control():
 		self.cliente = []
 		self.dic_operacoes = {'listar':self.listar,'adicionar':self.adicionar,'remover':self.remover}
 		self.proxima = {} #proxima alimentação
-		self.proxima_up = False; 
 
 	def listar(self, alimentacao):
 		response = {}
@@ -48,6 +47,10 @@ class Control():
 				response["resultado"] = "Alimentação excluida"
 			else:
 				response["resultado"] = "Alimentação não encontrada"
+			try:
+				self.update_proxima()
+			except:
+				self.proxima = {}
 		except:
 			response["resultado"] = "Erro ao tentar excluir o arquivo"
 			
@@ -55,15 +58,23 @@ class Control():
 		return response
 
 	def food_now(self):
+		alm = self.proxima
 		dados = {
             "tanque":self.proxima["tanque"],
             "tempo":self.proxima["quantidade"]
         }
 		while(not modulo_bluetooth.connect()):
 			pass
-		modulo_bluetooth.send_json(dados)
-		print(modulo_bluetooth.receive("!"))
-		controlAgenda.remover(self.proxima)
+		tentativas = 5
+		result = modulo_bluetooth.send_json(dados)
+		while((not result) and tentativas):
+			modulo_bluetooth.connect()
+			result = modulo_bluetooth.send_json(dados)
+			tentativas -= 1
+
+		if(result):
+			print(modulo_bluetooth.receive("!"))
+		controlAgenda.remover(alm)
 		self.update_proxima()
 
 	def update_proxima(self):

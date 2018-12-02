@@ -21,6 +21,7 @@ def connect():
         print("Connected HC-06")
         return True
     except:
+        sock = None
         return False
 
 def send_json(str_js):
@@ -29,6 +30,7 @@ def send_json(str_js):
         sock.send(json.dumps(str_js))
         return True
     except:
+        sock = None
         return False
 
 def receive(end_c):
@@ -39,6 +41,7 @@ def receive(end_c):
             data = data+sock.recv(1024).decode('utf-8')
         return data
     except:
+        sock = None
         return ""
 
 
