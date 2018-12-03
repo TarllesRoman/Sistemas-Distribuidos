@@ -7,9 +7,10 @@ from JCadastraAlimentacao import *
 
 class JAlimentacoes:
     
-    def __init__(self, root, dados):
+    def __init__(self, root, dados, host):
         self.myRoot = root
         self.myRoot.title("Alimentações")
+	self.host = host
 
         self.modal_open = False
 
@@ -62,8 +63,8 @@ class JAlimentacoes:
         #print( moduloCliente.remover(alimentacao["dia"], alimentacao["tanque"], alimentacao["quantidade"], [alimentacao["hora"],]))
         self.myRoot.destroy()
         janela = Tk()
-        response = moduloCliente.remover(alimentacao["dia"], alimentacao["tanque"], alimentacao["quantidade"], [alimentacao["hora"],])
-        JAlimentacoes(janela, json.loads(response))
+        response = moduloCliente.remover(self.host, alimentacao["dia"], alimentacao["tanque"], alimentacao["quantidade"], [alimentacao["hora"],])
+        JAlimentacoes(janela, json.loads(response), self.host)
 
     def adicionar(self):
             if self.modal_open: 
@@ -72,14 +73,14 @@ class JAlimentacoes:
                 self.modal_open = True
             janela = Tk()
             #response = moduloCliente.remover(alimentacao["dia"], alimentacao["tanque"], alimentacao["quantidade"], [alimentacao["hora"],])
-            JCadastraAlimentacao(janela,self)
+            JCadastraAlimentacao(janela,self, self.host)
             self.modal_open = True
 
     def restart(self):
         self.myRoot.destroy()
         janela = Tk()
-        response = moduloCliente.listar()
-        JAlimentacoes(janela, json.loads(response))
+        response = moduloCliente.listar(self.host)
+        JAlimentacoes(janela, json.loads(response), self.host)
 
     def __iniciaJanela(self):
         w = 300

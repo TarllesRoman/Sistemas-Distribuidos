@@ -8,12 +8,13 @@ from datetime import datetime, time
 
 class JCadastraAlimentacao:
     
-    def __init__(self, root, pai):
+    def __init__(self, root, pai, host):
         self.myRoot = root
         self.myRoot.title("Cadastro de Alimentação")
         self.frame = Frame(root)
         self.frame.pack()
         self.pai = pai
+	self.host = host
 
         self.txtDia = Label(self.frame, text="Dia: ", height=2,width=12)
         self.txtDia.grid(row=1,column=1)
@@ -56,7 +57,7 @@ class JCadastraAlimentacao:
         root.mainloop()
 
     def acaoBotaoInserir(self):
-        response = moduloCliente.adicionar(self.dia.get(), int(self.tanque.get()), int(self.qntde.get()), [self.hora.get()])
+        response = moduloCliente.adicionar(self.host, self.dia.get(), int(self.tanque.get()), int(self.qntde.get()), [self.hora.get()])
         print(response)
         self.__onclosing()
 
