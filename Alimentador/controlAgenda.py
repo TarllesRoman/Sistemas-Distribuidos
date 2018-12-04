@@ -29,6 +29,7 @@ def adicionar_alimentacao(agenda, alimentacao):
             return None
     dt = modulo_hora.str_time(alimentacao["dia"], alimentacao["hora"])
     alimentacao["timestamp"] = modulo_hora.get_timestamp(dt)
+    alimentacao["duracao"] = gramas_milliseconds(alimentacao["quantidade"])
     agenda.append(alimentacao)
     return agenda
 
@@ -40,6 +41,10 @@ def adicionar_alimentacoes(alimentacoes):
         alm = {"dia": alimentacoes["dia"],"tanque":alimentacoes["tanque"],"quantidade":alimentacoes["quantidade"],"hora":hora} #Alimentacao
         adicionar_alimentacao(agenda, alm)
     return escrever_agenda(agenda)
+
+def gramas_milliseconds(gramas):
+	s = gramas/13
+	return int(s) * 1000
 
 def remover(alimentacao):
     agenda = get_alimentacoes()

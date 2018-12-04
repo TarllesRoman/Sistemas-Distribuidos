@@ -1,4 +1,3 @@
-#include <aJSON.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
 
@@ -14,6 +13,22 @@ Servo s;//variavel do tipo servo
 char cmd;
 
 String command = ""; // Stores response of bluetooth device
+
+int get_tanque(String string){
+  String n = "";
+  for(int i = 0;string[i] != '#'; i++){
+     n += string[i];
+   }
+   return n.toInt();
+}
+
+long get_tempo(String string){
+  String n = "";
+  for(int i = 2, j = 0; i < string.length(); i++, j++){
+     n += string[i];
+   }
+   return n.toInt();
+}
 
 void setup()
 {
@@ -35,34 +50,31 @@ void loop()
      command += c;
     }
     Serial.println(command);
-    char jj[100];
-    command.toCharArray(jj, 100);
-    aJsonObject* root = aJson.parse(jj);
-    aJsonObject* tempo = aJson.getObjectItem(root, "tempo");
-    Serial.println("TEMPO: ");
-    Serial.println(tempo->valueint);
-    aJsonObject* tanque = aJson.getObjectItem(root, "tanque");
+    long tempo = get_tempo(command);
+    Serial.print("TEMPO: ");
+    Serial.println(tempo);
+    int tanque = get_tanque(command);
     Serial.println("TANQUE");
-    Serial.print(tanque->valueint);
+    Serial.print(tanque);
     
-    if(tanque->valueint==1){
+    if(tanque==1){
       Serial.write("Tanque1");
       servoDir();
-      alimentar(tempo->valueint);
+      alimentar(tempo);
       servoZero();
     }
     
-    if(tanque->valueint==2){
+    if(tanque==2){
       Serial.write("Tanque2");
       servoCentro();
-      alimentar(tempo->valueint);
+      alimentar(tempo);
       servoZero();
     }
     
-    if(tanque->valueint==3){
+    if(tanque==3){
       Serial.write("Tanque3");
       servoEsq();
-      alimentar(tempo->valueint);
+      alimentar(tempo);
       servoZero(); 
     }
     long siz = 4;
@@ -76,8 +88,9 @@ void loop()
 /***************************************
  * Ativa rele para alimentação de peixes
  */
-void releLigado(int tempAlim){
+void releLigado(long tempAlim){
   digitalWrite(REL, LOW);//Liga rele alimentador
+  Serial.println(tempAlim);
   delay(tempAlim);//Define tempo que alimentador fica ligado
 }//fim releligado **************************************
 
@@ -130,10 +143,8 @@ void servoZero(){
 /****************************************
  * define a quantidde em gramas que se deve alimentar no momento
  */
-void alimentar(int tempo){
+void alimentar(long tempo){
   //float tempo = (qtdG/130)*RAC10G;divide a quantidade por 10 pois o tempo min de alim e 10G
   releLigado(tempo);
   releDesligado();
 }//fim alimentar**************************************
-
-

@@ -36,10 +36,10 @@ def connect():
         sock = None
         return False
 
-def send_json(str_js):
+def send_dados(str_js):
     global sock
     try:
-        sock.send(json.dumps(str_js))
+        sock.send(str_js)
         return True
     except:
         sock = None

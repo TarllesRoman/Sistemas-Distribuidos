@@ -47,3 +47,35 @@
 {"dia": "02/12/2018", "tanque": 1, "quantidade": 800, "hora": "20:19", "timestamp": 1543789140.0}$ok
 {"dia": "02/12/2018", "tanque": 2, "quantidade": 1000, "hora": "20:24", "timestamp": 1543789440.0}$ok
 {"dia": "02/12/2018", "tanque": 1, "quantidade": 1000, "hora": "20:27", "timestamp": 1543789620.0}$ok
+{"dia": "02/12/2018", "tanque": 1, "quantidade": 400, "hora": "20:34", "timestamp": 1543790040.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 400, "hora": "20:36", "timestamp": 1543790160.0}$ok
+{"dia": "02/12/2018", "tanque": 3, "quantidade": 600, "hora": "20:38", "timestamp": 1543790280.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 400, "hora": "21:13", "timestamp": 1543792380.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 130, "hora": "21:14", "timestamp": 1543792440.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 130, "hora": "21:15", "timestamp": 1543792500.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 130, "hora": "21:16", "timestamp": 1543792560.0}$ok
+{"dia": "02/12/2018", "tanque": 1, "quantidade": 260, "hora": "21:19", "timestamp": 1543792740.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 500, "hora": "21:20", "timestamp": 1543792800.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 400, "hora": "21:35", "timestamp": 1543793700.0}$ok
+{"dia": "02/12/2018", "tanque": 2, "quantidade": 500, "hora": "21:37", "timestamp": 1543793820.0}$ok
+{"dia": "03/12/2018", "tanque": 1, "quantidade": 500, "hora": "15:40", "timestamp": 1543858800.0}$ok
+{"dia": "03/12/2018", "tanque": 1, "quantidade": 500, "hora": "15:50", "timestamp": 1543859400.0}$ok
+{"dia": "03/12/2018", "tanque": 2, "quantidade": 500, "hora": "15:51", "timestamp": 1543859460.0}$ok
+{"dia": "03/12/2018", "tanque": 1, "quantidade": 500, "hora": "15:52", "timestamp": 1543859520.0}$ok
+{"dia": "03/12/2018", "tanque": 1, "quantidade": 500, "hora": "15:58", "timestamp": 1543859880.0}$ok
+{"dia": "03/12/2018", "tanque": 2, "quantidade": 500, "hora": "16:02", "timestamp": 1543860120.0}$ok
+{"dia": "03/12/2018", "tanque": 1, "quantidade": 500, "hora": "16:38", "timestamp": 1543862280.0}$ok
+{"dia": "03/12/2018", "tanque": 3, "quantidade": 500, "hora": "16:46", "timestamp": 1543862760.0}$ok
+{"dia": "04/12/2018", "tanque": 1, "quantidade": 600, "hora": "16:10", "timestamp": 1543947000.0}$ok
+{"dia": "04/12/2018", "tanque": 2, "quantidade": 600, "hora": "16:15", "timestamp": 1543947300.0}$ok
+{"dia": "04/12/2018", "tanque": 1, "quantidade": 130, "hora": "16:18", "timestamp": 1543947480.0}$ok
+{"dia": "04/12/2018", "tanque": 3, "quantidade": 130, "hora": "16:19", "timestamp": 1543947540.0}$ok
+{"dia": "04/12/2018", "tanque": 1, "quantidade": 600, "hora": "16:51", "timestamp": 1543949460.0}$ok
+{"dia": "04/12/2018", "tanque": 2, "quantidade": 400, "hora": "16:53", "timestamp": 1543949580.0}$ok
+{"dia": "04/12/2018", "tanque": 6, "quantidade": 700, "hora": "16:56", "timestamp": 1543949760.0}$ok
+{"dia": "04/12/2018", "tanque": 2, "quantidade": 300, "hora": "18:16", "timestamp": 1543954560.0, "duracao": 23000}$ok
+{"dia": "04/12/2018", "tanque": 2, "quantidade": 500, "hora": "18:18", "timestamp": 1543954680.0, "duracao": 38000}$ok
+{"dia": "04/12/2018", "tanque": 1, "quantidade": 1000, "hora": "18:20", "timestamp": 1543954800.0, "duracao": 76000}$ok
+{"dia": "04/12/2018", "tanque": 2, "quantidade": 130, "hora": "18:21", "timestamp": 1543954860.0, "duracao": 10000}$ok
+{"dia": "04/12/2018", "tanque": 3, "quantidade": 1258, "hora": "18:42", "timestamp": 1543956120.0, "duracao": 96000}$erro
+{"dia": "04/12/2018", "tanque": 1, "quantidade": 400, "hora": "18:53", "timestamp": 1543956780.0, "duracao": 30000}$ok

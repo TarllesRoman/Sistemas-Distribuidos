@@ -35,7 +35,7 @@ class Control():
 			for alm in response["alimentacoes"]:
 				if(alm["timestamp"] < self.proxima["timestamp"]):
 					self.proxima = alm
-					break
+					#break
 		else:
 			self.update_proxima()
 		return response
@@ -59,18 +59,15 @@ class Control():
 
 	def food_now(self):
 		alm = self.proxima
-		dados = {
-            "tanque":self.proxima["tanque"],
-            "tempo":self.gramas_seconds(self.proxima["quantidade"])
-        }
+		dados = str(alm["tanque"])+"#"+str(alm["duracao"])
 		
 		modulo_bluetooth.connect()
 		tentativas = 2
-		result = modulo_bluetooth.send_json(dados)
+		result = modulo_bluetooth.send_dados(dados)
 		while((not result) and tentativas):
 			print("erro ao tentar realizar alimentação, tentativas restantes: "+str(tentativas))
 			modulo_bluetooth.connect()
-			result = modulo_bluetooth.send_json(dados)
+			result = modulo_bluetooth.send_dados(dados)
 			tentativas -= 1
 
 		if(result):
@@ -92,10 +89,6 @@ class Control():
 				time_s = alm["timestamp"]
 				self.proxima = alm
 		return time_s
-
-	def gramas_seconds(self, gramas):
-		s = gramas/13
-		return int(s) * 1000
 	
 	def escrever_log(self, resultado, alimentacao):
 		try:

@@ -11,9 +11,9 @@ def job_receiver():
             if(servidor.testeTCP()):
                 message,client = servidor.receiveUDP()
                 if(message):
-                    controle.ler = True
                     controle.mensagem = message
                     controle.cliente = client
+                    controle.ler = True
         except Exception as e:
             print("Tentativa de comunicação com chave invalida"+str(e))
 
@@ -31,7 +31,7 @@ def job_alimentar():
             controle.update_proxima()
             print("\nPROXIMA   : "+str(controle.proxima))
             while(controle.proxima["timestamp"] > (modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200)):
-                print("\nPA: " + str(controle.proxima["timestamp"]) + "     NOW: "+str(modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200))
+                #print("\nPA: " + str(controle.proxima["timestamp"]) + "     NOW: "+str(modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200))
                 time.sleep(5)
             print("\n\nRealizando a alimentação: "+str(controle.proxima))
             controle.food_now()
@@ -53,6 +53,3 @@ if __name__ == "__main__":
             print("\nTenho bocas para alimentar!")
             th_alimentar = threading.Thread(target=job_alimentar, args=())
             th_alimentar.start()
-
-
-

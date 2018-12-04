@@ -1,1 +1,1 @@
-[]
+[{"dia": "04/12/2018", "tanque": 3, "quantidade": 600, "hora": "19:30", "timestamp": 1543959000.0, "duracao": 46000}]

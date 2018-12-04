@@ -33,7 +33,7 @@ def request_utc():
 
     return datetime.strptime(time, '%Y-%m-%dT%H:%MZ')
 
-'''Pega a hora do sistema em UTC'''
+'''Pega a hora do sistemacc em UTC'''
 def utc_now():
     return datetime.utcnow()
 
