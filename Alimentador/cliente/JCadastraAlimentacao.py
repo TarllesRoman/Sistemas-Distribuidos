@@ -16,13 +16,16 @@ class JCadastraAlimentacao:
         self.pai = pai
 	self.host = host
 
-        self.txtDia = Label(self.frame, text="Dia: ", height=2,width=12)
+        self.txtDia = Label(self.frame, text="Dia: ", height=2,width=10)
         self.txtDia.grid(row=1,column=1)
 
         self.dia = Entry(self.frame)
         now = datetime.now()
         self.dia.insert(END,now.strftime("%d/%m/%Y"))
         self.dia.grid(row=1,column=2)
+        
+        self.tipodia = Label(self.frame, text="dd/MM/yyyy")
+        self.tipodia.grid(row=1, column=3)
 
         self.txtHora = Label(self.frame, text="Hora: ", height=2,width=12)
         self.txtHora.grid(row=2,column=1)
@@ -30,18 +33,27 @@ class JCadastraAlimentacao:
         self.hora = Entry(self.frame)
         self.hora.insert(END,now.strftime("%H:"))
         self.hora.grid(row=2,column=2)
+        
+        self.tipohora = Label(self.frame, text="hh:mm")
+        self.tipohora.grid(row=2,column=3)
 
         self.txtTanque = Label(self.frame, text="Tanque: ", height=2,width=12)
         self.txtTanque.grid(row=3,column=1)
 
         self.tanque = Entry(self.frame)
         self.tanque.grid(row=3,column=2)
+        
+        self.tipotanque = Label(self.frame, text="1 - 3")
+        self.tipotanque.grid(row=3,column=3)
 
         self.txtQntde = Label(self.frame,text="Quantidade:", height=2,width=12)
         self.txtQntde.grid(row=4,column=1)
 
         self.qntde = Entry(self.frame)
         self.qntde.grid(row=4,column=2)
+        
+        self.tipoqnt = Label(self.frame, text="gramas")
+        self.tipoqnt.grid(row=4,column=3)
 
         self.btnInserir = Button(self.frame,text="Salvar", height=2,width=18)
         self.btnInserir.grid(row=5,column=0,columnspan=2, rowspan=2)

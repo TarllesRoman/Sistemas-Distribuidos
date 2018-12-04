@@ -32,6 +32,8 @@ class JAlimentacoes:
         self.txttanque.grid(row=0,column=2)
         self.txtqnt = Label(self.tabela,text="Quantidade")
         self.txtqnt.grid(row=0,column=3)
+        self.txtduracao = Label(self.tabela, text="Duracao")
+        self.txtduracao.grid(row=0, column=4)
 
         self.alimentacoes = dados["alimentacoes"]
         for i in range(len(self.alimentacoes)):
@@ -51,13 +53,17 @@ class JAlimentacoes:
         tanque = Label(self.tabela, text=alimentacao["tanque"], height=2, width=10)
         tanque.grid(row=i, column=2)
         
-        quantidade = Label(self.tabela, text=alimentacao["quantidade"], height=2, width=10)
+        quantidade = Label(self.tabela, text=str(alimentacao["quantidade"]) + ' gramas', height=2, width=10)
         quantidade.grid(row=i, column=3)
+        
+        duracao = Label(self.tabela, text=str(alimentacao['duracao']/1000)+ ' seg.', height=2, width=10)
+        duracao.grid(row=i, column=4)
+       
         
 
         btnDeletar = Button(self.tabela, text="Apagar", height=2, width=10)
         btnDeletar["command"] = lambda:self.acaoBotao(alimentacao)
-        btnDeletar.grid(row=i, column=4)
+        btnDeletar.grid(row=i, column=5)
 
     def acaoBotao(self, alimentacao):
         #print( moduloCliente.remover(alimentacao["dia"], alimentacao["tanque"], alimentacao["quantidade"], [alimentacao["hora"],]))
