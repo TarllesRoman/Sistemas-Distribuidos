@@ -4,6 +4,9 @@ import json, modulo_hora
 
 file_name = "agenda.txt"
 
+gramas_s = float(input("Informe a quantidade de gramas: "))
+segundo = float(input("Em quantos segundos: "))
+
 def get_alimentacoes():
     try:
         file = open(file_name,"r")
@@ -29,7 +32,7 @@ def adicionar_alimentacao(agenda, alimentacao):
             return None
     dt = modulo_hora.str_time(alimentacao["dia"], alimentacao["hora"])
     alimentacao["timestamp"] = modulo_hora.get_timestamp(dt)
-    alimentacao["duracao"] = gramas_milliseconds(alimentacao["quantidade"])
+    alimentacao["duracao"] = int(gramas_milliseconds(alimentacao["quantidade"]))
     agenda.append(alimentacao)
     return agenda
 
@@ -43,8 +46,8 @@ def adicionar_alimentacoes(alimentacoes):
     return escrever_agenda(agenda)
 
 def gramas_milliseconds(gramas):
-	s = gramas/13
-	return int(s) * 1000
+	s = float(gramas * segundo/gramas_s)
+	return int(s * 1000)
 
 def remover(alimentacao):
     agenda = get_alimentacoes()

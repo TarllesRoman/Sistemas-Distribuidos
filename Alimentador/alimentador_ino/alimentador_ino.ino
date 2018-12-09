@@ -4,9 +4,10 @@
 #define SERVO 2//define motor servo na porta digital 6
 #define REL 10//define rele de energia na porta digital 7
 #define ESQ 130 //define alimentador saida da esquerda
-#define DIR 15 // define alimentador saida da direita
+#define DIR 20 // define alimentador saida da direita
 #define CEN 70 // define alimentador centro
 #define DELPOS 500//Define um delay de giro de posicao do servo
+#define BTN 12
 
 SoftwareSerial BT(5, 7); // RX, TX
 Servo s;//variavel do tipo servo
@@ -33,16 +34,23 @@ long get_tempo(String string){
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("Type AT commands!");
   BT.begin(9600); // HC-06 usually default baud-rate
   pinMode(SERVO, OUTPUT);
   pinMode(REL,OUTPUT);
+  pinMode(BTN,INPUT);
   digitalWrite(REL, HIGH);//Desliga rele alimentador
   s.attach(SERVO);
+  //servoDir();
+  servoZero();
 }
 
 void loop()
 {
+  if(digitalRead(BTN)){
+    while(digitalRead(BTN))
+      releLigado(300);
+      releDesligado();
+  }
   if (BT.available()) {
     while(BT.available()){
      delay(10);
@@ -61,25 +69,20 @@ void loop()
       Serial.write("Tanque1");
       servoDir();
       alimentar(tempo);
-      servoZero();
     }
     
     if(tanque==2){
       Serial.write("Tanque2");
-      servoCentro();
-      alimentar(tempo);
-      servoZero();
-    }
-    
-    if(tanque==3){
-      Serial.write("Tanque3");
       servoEsq();
       alimentar(tempo);
-      servoZero(); 
     }
-    long siz = 4;
+    
+    delay(2000);
+    servoZero(); 
     BT.print(String("End!"));
-    command = ""; 
+    command = "";
+    tempo = 0;
+    tanque = 0;
   }
 }
 

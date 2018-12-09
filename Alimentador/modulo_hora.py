@@ -27,11 +27,14 @@ def from_timestamp(timestamp):
 
 '''Realiza uma requisição HTTP para pegar a hora em UTC'''
 def request_utc():
-    r = requests.get(url)
-    jso = r.json()
-    time = jso['currentDateTime']
+    try:
+        r = requests.get(url)
+        jso = r.json()
+        time = jso['currentDateTime']
 
-    return datetime.strptime(time, '%Y-%m-%dT%H:%MZ')
+        return datetime.strptime(time, '%Y-%m-%dT%H:%MZ')
+    except:
+        return utc_now()
 
 '''Pega a hora do sistemacc em UTC'''
 def utc_now():

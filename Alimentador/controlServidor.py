@@ -1,7 +1,7 @@
 #coding: utf-8
 
 import threading, json
-import controlAgenda, modulo_bluetooth
+import modulo_bluetooth,controlAgenda
 
 class Control():
 	def __init__(self):
