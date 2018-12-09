@@ -43,7 +43,7 @@ class JCadastraAlimentacao:
         self.tanque = Entry(self.frame)
         self.tanque.grid(row=3,column=2)
         
-        self.tipotanque = Label(self.frame, text="1 - 3")
+        self.tipotanque = Label(self.frame, text="1 - 2")
         self.tipotanque.grid(row=3,column=3)
 
         self.txtQntde = Label(self.frame,text="Quantidade:", height=2,width=12)
