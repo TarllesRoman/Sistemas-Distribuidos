@@ -30,7 +30,8 @@ def job_alimentar():
         try:
             controle.update_proxima()
             print("\nPROXIMA   : "+str(controle.proxima))
-            while(controle.proxima["timestamp"] > (modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200)):
+            while(controle.proxima["timestamp"] > 
+                  (modulo_hora.get_timestamp(modulo_hora.request_utc()) - 7200)):
                 time.sleep(5)
             print("\n\nRealizando a alimentação: "+str(controle.proxima))
             controle.food_now()
